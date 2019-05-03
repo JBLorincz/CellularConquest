@@ -29,11 +29,16 @@ int main()
 
 	//place the first cells 
 	gameManager.cells[0][0].joinColony(&gameManager.colonies.at(0));
-	std::vector<Cell> cellBuffer;
+	gameManager.cells[499][499].joinColony(&gameManager.colonies.at(1));
+	//std::vector<Cell*> cellBuffer;
+	int convertedThisTurn = 0;
 	while (window.isOpen())
 	{
-		std::cout << cellBuffer.size()<<std::endl;
-		cellBuffer.clear();
+		for (int i = 0; i < 500; i++)
+			for (int j = 0; j < 500; j++)
+				gameManager.cells[i][j].locked = false;
+		std::cout << convertedThisTurn<<std::endl;
+		convertedThisTurn = 0;
 		
 
 		//1. handle the logic
@@ -45,10 +50,12 @@ int main()
 		}
 		//2. draw stuff
 		window.clear(sf::Color::Black);
+
+		//check adjacent cells if they can be captured
 		for (int i = 0; i < 500; i++)
 			for (int j = 0; j < 500; j++)
 			{
-				if (gameManager.cells[i][j].myColony != &gameManager.nullColony)
+				if (gameManager.cells[i][j].myColony != &gameManager.nullColony &&gameManager.cells[i][j].locked==false)
 				{
 					window.draw(gameManager.cells[i][j].pixel);
 
@@ -69,18 +76,36 @@ int main()
 					if (down < 500)
 						downAvailable = true;
 
-					if(upAvailable &&gameManager.cells[i][up].myColony!=gameManager.cells[i][j].myColony)//if can go up, go up
-						cellBuffer.push_back(Cell(i, up, gameManager.cells[i][j].myColony));
+					if (upAvailable &&gameManager.cells[i][up].myColony != gameManager.cells[i][j].myColony&&gameManager.cells[i][up].locked == false)//if can go up, go up
+					{
+						//cellBuffer.push_back(new Cell(i, up, gameManager.cells[i][j].myColony));
+						gameManager.cells[i][up].joinColony(gameManager.cells[i][j].myColony);
+						gameManager.cells[i][up].locked = true;
+						convertedThisTurn++;
+					}
+					if (downAvailable &&gameManager.cells[i][down].myColony != gameManager.cells[i][j].myColony &&gameManager.cells[i][down].locked == false)//if can go down
+					{
+						//cellBuffer.push_back(Cell(i, down, gameManager.cells[i][j].myColony));
+						gameManager.cells[i][down].joinColony(gameManager.cells[i][j].myColony);
+						gameManager.cells[i][down].locked = true;
+						convertedThisTurn++;
 
-					if (downAvailable &&gameManager.cells[i][down].myColony != gameManager.cells[i][j].myColony)//if can go down
-						cellBuffer.push_back(Cell(i, down, gameManager.cells[i][j].myColony));
+					}
+					if (leftAvailable &&gameManager.cells[left][j].myColony != gameManager.cells[i][j].myColony &&gameManager.cells[left][j].locked == false)//if can go left
+					{
+						//cellBuffer.push_back(Cell(left, j, gameManager.cells[i][j].myColony));
+						gameManager.cells[left][j].joinColony(gameManager.cells[i][j].myColony);
+						gameManager.cells[left][j].locked = true;
+						convertedThisTurn++;
 
-					if (leftAvailable &&gameManager.cells[left][j].myColony != gameManager.cells[i][j].myColony)//if can go left
-						cellBuffer.push_back(Cell(left, j, gameManager.cells[i][j].myColony));
-
-					if (rightAvailable &&gameManager.cells[right][j].myColony != gameManager.cells[i][j].myColony)//if can go right
-						cellBuffer.push_back(Cell(right, j, gameManager.cells[i][j].myColony));
-						
+					}
+					if (rightAvailable &&gameManager.cells[right][j].myColony != gameManager.cells[i][j].myColony &&gameManager.cells[right][j].locked == false)//if can go right
+					{
+						//cellBuffer.push_back(Cell(right, j, gameManager.cells[i][j].myColony));
+						gameManager.cells[right][j].joinColony(gameManager.cells[i][j].myColony);
+						gameManager.cells[right][j].locked = true;
+						convertedThisTurn++;
+					}
 						//cellBuffer.push_back(Cell(i + 1, j, gameManager.cells[i][j].myColony));
 				}
 
@@ -89,9 +114,11 @@ int main()
 		//3. end the frame
 		window.display();
 		//4. add new cells
-		for (Cell c : cellBuffer)
-			gameManager.cells[c.xCoord][c.yCoord].joinColony(c.myColony);
-		
+		//for (Cell* c : cellBuffer)
+		//{
+			//gameManager.cells[c.xCoord][c.yCoord].joinColony(c.myColony);
+
+		//}
 	}
 	return 0;
 }

@@ -26,10 +26,18 @@ void Cell::initialize(int xCoord, int yCoord, Colony * myColony)
 	pixel = sf::RectangleShape(sf::Vector2f(1, 1));
 	pixel.setPosition(sf::Vector2f(xCoord, yCoord));
 	pixel.setFillColor(myColony->teamColor);
+	locked = false;
 }
 
 void Cell::joinColony(Colony * myColony)
 {
 	this->myColony = myColony;
+	myColony->numberOfCells++;
 	pixel.setFillColor(myColony->teamColor);
+	locked = true;
+}
+
+void Cell::unlock()
+{
+	locked = false;
 }
