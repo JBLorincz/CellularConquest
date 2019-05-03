@@ -6,6 +6,7 @@
 	while (true)
 		std::cout << "Hello World!";
 }*/
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "GameManager.h"
@@ -31,8 +32,9 @@ int main()
 	std::vector<Cell> cellBuffer;
 	while (window.isOpen())
 	{
+		std::cout << cellBuffer.size()<<std::endl;
 		cellBuffer.clear();
-
+		
 
 		//1. handle the logic
 		sf::Event newEvent;
