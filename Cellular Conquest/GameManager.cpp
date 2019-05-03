@@ -9,15 +9,15 @@ GameManager::GameManager(std::vector<Colony> colonies)
 	for (Colony c : colonies)
 		this->colonies.push_back(c);
 
-	cells = new Cell*[500];
-	for (int i = 0; i < 500; i++)
+	cells = new Cell*[constants::SQUARESIZE];
+	for (int i = 0; i < constants::SQUARESIZE; i++)
 	{
-		cells[i] = new Cell[500];
+		cells[i] = new Cell[constants::SQUARESIZE];
 	}
 
 	//now all the cells exist, lets set em up.
-	for (int i = 0; i < 500; i++)
-		for (int j = 0; j < 500; j++)
+	for (int i = 0; i < constants::SQUARESIZE; i++)
+		for (int j = 0; j < constants::SQUARESIZE; j++)
 	{
 			cells[i][j].initialize(i, j, &nullColony);
 	}

@@ -2,6 +2,7 @@
 #include <vector>
 #include "Colony.h"
 #include "Cell.h"
+#include "Constants.h"
 class GameManager
 {
 public:
