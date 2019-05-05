@@ -45,6 +45,7 @@ int main()
 			lockedBuffer.at(0)->locked = false;
 			lockedBuffer.erase(lockedBuffer.begin());
 		}
+
 		//lockedBuffer.clear();
 		//std::cout << convertedThisTurn << std::endl;
 		convertedThisTurn = 0;
@@ -87,16 +88,16 @@ int main()
 
 					if (upAvailable &&gameManager.cells[i][up].myColony != gameManager.cells[i][j].myColony&&gameManager.cells[i][up].locked == false)//if can go up, go up
 					{
-						gameManager.cells[i][up].joinColony(gameManager.cells[i][j].myColony);
-						gameManager.cells[i][up].locked = true;
+						gameManager.cells[i][j].attackCell(&gameManager.cells[i][up]);
+					//	gameManager.cells[i][up].joinColony(gameManager.cells[i][j].myColony);
 						lockedBuffer.push_back(&gameManager.cells[i][up]);
 						convertedThisTurn++;
 					}
 
 					if (downAvailable &&gameManager.cells[i][down].myColony != gameManager.cells[i][j].myColony &&gameManager.cells[i][down].locked == false)//if can go down
 					{
-						gameManager.cells[i][down].joinColony(gameManager.cells[i][j].myColony);
-						gameManager.cells[i][down].locked = true;
+					//	gameManager.cells[i][down].joinColony(gameManager.cells[i][j].myColony);
+						gameManager.cells[i][j].attackCell(&gameManager.cells[i][down]);
 						lockedBuffer.push_back(&gameManager.cells[i][down]);
 						convertedThisTurn++;
 
@@ -104,9 +105,8 @@ int main()
 
 					if (leftAvailable &&gameManager.cells[left][j].myColony != gameManager.cells[i][j].myColony &&gameManager.cells[left][j].locked == false)//if can go left
 					{
-						gameManager.cells[left][j].joinColony(gameManager.cells[i][j].myColony);
-					
-						gameManager.cells[left][j].locked = true;
+					//	gameManager.cells[left][j].joinColony(gameManager.cells[i][j].myColony);
+						gameManager.cells[i][j].attackCell(&gameManager.cells[left][j]);
 						lockedBuffer.push_back(&gameManager.cells[left][j]);
 						convertedThisTurn++;
 
@@ -114,8 +114,8 @@ int main()
 
 					if (rightAvailable &&gameManager.cells[right][j].myColony != gameManager.cells[i][j].myColony &&gameManager.cells[right][j].locked == false)//if can go right
 					{
-						gameManager.cells[right][j].joinColony(gameManager.cells[i][j].myColony);
-						gameManager.cells[right][j].locked = true;
+					//	gameManager.cells[right][j].joinColony(gameManager.cells[i][j].myColony);
+						gameManager.cells[i][j].attackCell(&gameManager.cells[right][j]);
 						lockedBuffer.push_back(&gameManager.cells[right][j]);
 						convertedThisTurn++;
 					}
