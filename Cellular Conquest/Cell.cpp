@@ -96,8 +96,6 @@ void Cell::attackCell(Cell * toAttack)
 		if (rand() % 2 == 0)
 		toAttack->myColony->defense++;
 
-
-
 		if (rand() % 1000 == 0)
 		{
 			//toAttack->attack += 100000;
