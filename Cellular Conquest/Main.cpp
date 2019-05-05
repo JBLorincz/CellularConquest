@@ -4,6 +4,7 @@
 #include "GameManager.h"
 #include "Cell.h"
 #include "Constants.h"
+#include <random>
 #define up j-1
 #define down j+1
 #define left i-1
@@ -27,18 +28,43 @@ int main()
 	//initialColonies.at(3).attack += 1;
 	//initialColonies.at(3).defense += 1;
 	GameManager gameManager(initialColonies);
-
 	//place the first cells 
 	
-	gameManager.cells[0][0].joinColony(&gameManager.colonies.at(0));
-	gameManager.cells[constants::SQUARESIZE-1][constants::SQUARESIZE - 1].joinColony(&gameManager.colonies.at(1));
-	gameManager.cells[0][constants::SQUARESIZE - 1].joinColony(&gameManager.colonies.at(2));
-	gameManager.cells[constants::SQUARESIZE - 1][0].joinColony(&gameManager.colonies.at(3));
+	srand(time(0));
+		int x = std::rand()%constants::SQUARESIZE;
+		int y = std::rand() % constants::SQUARESIZE;
+		std::cout << x << " " << y << std::endl;
+		sf::Time t = sf::seconds(1);
+		sf::sleep(t);
+	gameManager.cells[x][y].joinColony(&gameManager.colonies.at(0));
+	gameManager.cells[x][y].unlock();
 	
-	gameManager.cells[0][0].unlock();
-	gameManager.cells[constants::SQUARESIZE - 1][constants::SQUARESIZE - 1].unlock();
-	gameManager.cells[0][constants::SQUARESIZE - 1].unlock();
-	gameManager.cells[constants::SQUARESIZE - 1][0].unlock();
+	//srand(time(0));
+	int a = std::rand() % constants::SQUARESIZE;
+	int b = std::rand() % constants::SQUARESIZE;
+	std::cout << a << " " << b << std::endl;
+	 t = sf::seconds(1);
+	sf::sleep(t);
+	 gameManager.cells[a][b].joinColony(&gameManager.colonies.at(1));
+	 gameManager.cells[a][b].unlock();
+	 
+	// srand(time(0));
+	 int c = std::rand() % constants::SQUARESIZE;
+	 int d = std::rand() % constants::SQUARESIZE;
+	 std::cout << c << " " << d << std::endl;
+	  t = sf::seconds(1);
+	 sf::sleep(t);
+	 gameManager.cells[c][d].joinColony(&gameManager.colonies.at(2));
+	 gameManager.cells[c][d].unlock();
+
+	// srand(time(0));
+	 int e = std::rand() % constants::SQUARESIZE;
+	 int f = std::rand() % constants::SQUARESIZE;
+	  t = sf::seconds(1);
+	 sf::sleep(t);
+	 std::cout << e << " " << f << std::endl;
+	 gameManager.cells[e][f].joinColony(&gameManager.colonies.at(3));
+	 gameManager.cells[e][f].unlock();
 	
 	std::vector<Cell*> lockedBuffer;
 	int convertedThisTurn = 0;
@@ -139,7 +165,7 @@ int main()
 			if (gameManager.colonies.at(i).numberOfCells >= constants::SQUARESIZE*constants::SQUARESIZE)
 			{
 				std::cout << "Colony " << i << " won!" << std::endl << "Closing program in 10 seconds.";
-				sf::Time t = sf::seconds(10);
+				 t = sf::seconds(10);
 
 				sf::sleep(t);
 				window.close();
