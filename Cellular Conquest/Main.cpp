@@ -17,17 +17,21 @@ int main()
 	std::vector<Colony> initialColonies;
 	initialColonies.push_back(Colony(sf::Color::Red));
 	initialColonies.push_back(Colony(sf::Color::Blue));
-
+	initialColonies.push_back(Colony(sf::Color::Green));
+	initialColonies.push_back(Colony(sf::Color::Yellow));
 	GameManager gameManager(initialColonies);
 
 	//place the first cells 
 	
 	gameManager.cells[0][0].joinColony(&gameManager.colonies.at(0));
 	gameManager.cells[constants::SQUARESIZE-1][constants::SQUARESIZE - 1].joinColony(&gameManager.colonies.at(1));
-	
+	gameManager.cells[0][constants::SQUARESIZE - 1].joinColony(&gameManager.colonies.at(2));
+	gameManager.cells[constants::SQUARESIZE - 1][0].joinColony(&gameManager.colonies.at(3));
 	
 	gameManager.cells[0][0].unlock();
 	gameManager.cells[constants::SQUARESIZE - 1][constants::SQUARESIZE - 1].unlock();
+	gameManager.cells[0][constants::SQUARESIZE - 1].unlock();
+	gameManager.cells[constants::SQUARESIZE - 1][0].unlock();
 	
 	std::vector<Cell*> lockedBuffer;
 	int convertedThisTurn = 0;
