@@ -64,19 +64,48 @@ void Cell::joinColony(Colony * newColony)
 
 void Cell::attackCell(Cell * toAttack)
 {
+	srand(time(0));
+	if(rand()%2==0)
 	attack++;
-	defense++;
-	if (attack > toAttack->defense)
+
+	//srand(time(0));
+	//if (rand() % 2 == 0)
+	//defense++;
+	
+
+	if (attack > toAttack->defense)//if toAttack is losing a cell
 	{
-		toAttack->joinColony(myColony);
-		srand(time(0));
-			
-			if (rand()%4==0)
+			srand(time(0));
+			if (rand()%2==0)
 				myColony->attack++;
+
+
+			//srand(time(0));
+			//if (rand() % 2 == 0)
+				toAttack->myColony->defense++;
+			//	toAttack->myColony->attack++;
+
+			toAttack->joinColony(myColony);
 	}
-	else
+	
+	else //if toAttack sucessfully defended
+	{
+		toAttack->defense++;
+
+		srand(time(0));
 		if (rand() % 2 == 0)
-			toAttack->myColony->defense++;
+		toAttack->myColony->defense++;
+
+
+
+		if (rand() % 1000 == 0)
+		{
+			//toAttack->attack += 100000;
+			toAttack->myColony->attack *= 2;
+			//toAttack->defense += 100000;
+			toAttack->myColony->defense *= 2;
+		}
+	}
 }
 
 void Cell::unlock()
