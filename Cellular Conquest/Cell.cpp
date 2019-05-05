@@ -75,7 +75,7 @@ void Cell::attackCell(Cell * toAttack)
 				myColony->attack++;
 	}
 	else
-		//if (rand() % 2 == 0)
+		if (rand() % 2 == 0)
 			toAttack->myColony->defense++;
 }
 
