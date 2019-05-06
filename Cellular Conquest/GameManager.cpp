@@ -5,7 +5,8 @@
 GameManager::GameManager(std::vector<Colony> colonies)
 {
 	nullColony = Colony(sf::Color::Black);
-
+	nullColony.attack = 0;
+	nullColony.defense = 0;
 	for (Colony c : colonies)
 		this->colonies.push_back(c);
 

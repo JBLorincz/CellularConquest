@@ -71,6 +71,8 @@ int main()
 	
 	while (window.isOpen())// GAME START
 	{
+		gameManager.nullColony.attack = 0;
+		gameManager.nullColony.defense = 0;
 
 		while (lockedBuffer.size() > 0)
 		{
