@@ -37,13 +37,13 @@ void Cell::joinColony(Colony * newColony)
 	myColony->numberOfCells--;//subtract its colonies cells by 1 cuz its leaving
 	
 	myColony = newColony;//assign new colony
-	srand(time(0));
+
 	int neg = 1;
 	if (rand() % 2 != 0)
 		neg = -1;
 
 	attack = myColony->attack
-		+ (rand()% (int)(ceil((double)myColony->attack / 10.0)*neg))
+		+ (rand()% (int)(ceil((double)myColony->attack /10)*neg))
 		;
 
 	if (rand() % 2 != 0)
@@ -52,12 +52,10 @@ void Cell::joinColony(Colony * newColony)
 		neg = -1;
 
 	defense = myColony->defense 
-		+ (rand() % (int)(ceil((double)myColony->defense / 10.0)*neg))
+		+ (rand() % (int)(ceil((double)myColony->defense/10)*neg))
 		;
 
-	//std::cout <<"numbercells before: "<< this->myColony->numberOfCells << std::endl;
-	//myColony->numberOfCells++;//add 1 to the new colony
-	//std::cout << "numbercells after: " << this->myColony->numberOfCells << std::endl<<std::endl;
+	
 	pixel.setFillColor(myColony->teamColor);
 	locked = true;
 }
@@ -68,10 +66,7 @@ void Cell::attackCell(Cell * toAttack)
 	if(rand()%2==0)
 	attack++;
 
-	//srand(time(0));
-	//if (rand() % 2 == 0)
-	//defense++;
-	
+
 	if(toAttack->myColony->defense==0)
 		toAttack->joinColony(myColony);
 
@@ -82,11 +77,7 @@ void Cell::attackCell(Cell * toAttack)
 			if (rand()%2==0)
 				myColony->attack++;
 
-
-			//srand(time(0));
-			//if (rand() % 2 == 0)
 				toAttack->myColony->defense++;
-			//	toAttack->myColony->attack++;
 
 			toAttack->joinColony(myColony);
 	}
@@ -100,9 +91,9 @@ void Cell::attackCell(Cell * toAttack)
 
 		if (rand() % 1000 == 0)
 		{
-			//toAttack->attack += 100000;
+			
 			toAttack->myColony->attack *= 2;
-			//toAttack->defense += 100000;
+			
 			toAttack->myColony->defense *= 2;
 		}
 	}

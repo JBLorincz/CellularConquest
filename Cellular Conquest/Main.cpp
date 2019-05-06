@@ -39,7 +39,7 @@ int main()
 	gameManager.cells[x][y].joinColony(&gameManager.colonies.at(0));
 	gameManager.cells[x][y].unlock();
 	
-	//srand(time(0));
+	
 	int a = std::rand() % constants::SQUARESIZE;
 	int b = std::rand() % constants::SQUARESIZE;
 	std::cout << a << " " << b << std::endl;
@@ -48,7 +48,7 @@ int main()
 	 gameManager.cells[a][b].joinColony(&gameManager.colonies.at(1));
 	 gameManager.cells[a][b].unlock();
 	 
-	// srand(time(0));
+	
 	 int c = std::rand() % constants::SQUARESIZE;
 	 int d = std::rand() % constants::SQUARESIZE;
 	 std::cout << c << " " << d << std::endl;
@@ -57,7 +57,8 @@ int main()
 	 gameManager.cells[c][d].joinColony(&gameManager.colonies.at(2));
 	 gameManager.cells[c][d].unlock();
 
-	// srand(time(0));
+	
+
 	 int e = std::rand() % constants::SQUARESIZE;
 	 int f = std::rand() % constants::SQUARESIZE;
 	  t = sf::seconds(1);
