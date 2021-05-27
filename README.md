@@ -1,7 +1,5 @@
 # CellularConquest
-A machine learning powered simulation where colonies of cells compete to be the last one standing.
-Machines will learn how to balance their offense and defense (and alliances, in the future) optimally in order to become the last colony standing.
+A small project I made in my spare time, which simulates colonies of cells fighting each other to conquer the entire window. It's not really optimized and in its current state, the colony which spawns closest to the top-left has an advantage due to how the combat algorithm works, but I had alot of fun and learned alot making this. 
 
-NOTE: Cellular Conquest has just started development. IT IS NOT READY YET
 
 Made on VS2015 with C++ using SFML 
